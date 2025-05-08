@@ -1,40 +1,33 @@
-name: build GogakuDorid
+name: Build GogakuDroid
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: 作業用ディレクトリを作成
-      run: |
-         mkdir -p app/lib
-         mkdir ffmpeg-kit && cd ffmpeg-kit
-
-    - name: ffmpeg-kit のソースを clone（forkから）
-      run: |
-        git clone https://github.com/CSReviser/ffmpeg-kit.git
-        cd ffmpeg-kit
 
     - name: JDK 17 をセットアップ
       uses: actions/setup-java@v3
       with:
-          distribution: 'temurin'
-          java-version: '17'
+        distribution: 'temurin'
+        java-version: '17'
 
     - name: Set up Android SDK
       uses: android-actions/setup-android@v2
-      
+
     - name: Install NDK r25c
       run: |
-          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;25.2.9519653"
+        yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;25.2.9519653"
 
     - name: Set ANDROID_NDK_ROOT
       run: echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/25.2.9519653" >> $GITHUB_ENV
+
+    - name: Clone ffmpeg-kit (from fork)
+      run: git clone https://github.com/CSReviser/ffmpeg-kit.git
 
     - name: Grant execute permission to android.sh
       run: chmod +x ffmpeg-kit/android.sh
@@ -43,24 +36,22 @@ jobs:
       working-directory: ffmpeg-kit
       run: |
         bash -x ./android.sh > ../build.log 2>&1 || (cat ../build.log && exit 1)
-        cp -r ffmpeg-kit/prebuilt/bundle-android-aar/*.aar /app/lib/
-
-    - name: set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: gradle
+        mkdir -p ../app/libs
+        cp -v prebuilt/bundle-android-aar/*.aar ../app/libs/
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
+
+    - name: Build GogakuDroid with Gradle
       run: ./gradlew build
 
-    - name: Copy files
-      run: cp -r ./app/build/outputs/apk/ ./apk/ 
-      
-    - uses: actions/upload-artifact@v4
+    - name: Copy APK outputs
+      run: |
+        mkdir -p apk
+        cp -r ./app/build/outputs/apk/* ./apk/
+
+    - name: Upload APK artifacts
+      uses: actions/upload-artifact@v4
       with:
         name: GogakuDroid
         path: ./apk/
