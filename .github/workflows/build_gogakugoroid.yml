@@ -37,6 +37,7 @@ jobs:
       run: |
         bash -x ./android.sh > ../build.log 2>&1 || (cat ../build.log && exit 1)
         mkdir -p ../app/libs
+        ls -r prebuilt/bundle-android-aar/
         cp -v prebuilt/bundle-android-aar/*.aar ../app/libs/
 
     - name: Grant execute permission for gradlew
