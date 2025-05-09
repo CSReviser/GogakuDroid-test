@@ -472,15 +472,6 @@ public class MainActivity extends Activity {
 					todoName.setText(item.getKouza());
 				}
 
-		    if ("放送翌週月曜日から1週間".equals(item.getKouza())) {
-		        // セクションタイトル行：CheckBox 非表示、TextView 強調
-		        ck.setVisibility(View.GONE);
-		        todoName.setText(item.getKouza());
-		        todoName.setTypeface(null, Typeface.BOLD);
-		        todoName.setTextSize(24);  // タイトルは大きく
-		        todoName.setPadding(16, 16, 16, 16);
-		    } 
-				
 				CheckBox ck = (CheckBox) view.findViewById(R.id.todo_check);
 				final int p = position;
 				ck.setOnCheckedChangeListener(new OnCheckedChangeListener() {
