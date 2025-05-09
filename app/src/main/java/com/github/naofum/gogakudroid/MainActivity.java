@@ -386,7 +386,7 @@ public class MainActivity extends Activity {
 		dialog.show();
 	}
 
-/*
+/*	
     public class ClassAdapter extends ArrayAdapter {
 
 		private ArrayList<Classes> items;
@@ -420,43 +420,47 @@ public class MainActivity extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 		    View view = convertView;
 		    if (view == null) {
-		        view = inflater.inflate(R.layout.list_row, parent, false);
+		        view = inflater.inflate(R.layout.list_row, null);
 		    }
 
 		    Classes item = (Classes) items.get(position);
-		    if (item == null) return view;
+		    if (item != null) {
+		        TextView todoName = (TextView) view.findViewById(R.id.todo_name);
+		        CheckBox ck = (CheckBox) view.findViewById(R.id.todo_check);
 
-		    TextView todoName = view.findViewById(R.id.todo_name);
-		    CheckBox ck = view.findViewById(R.id.todo_check);
+		        if ("title".equals(item.getKey())) {
+		            // タイトル行：CheckBox 非表示、TextView 強調
+ 		           ck.setVisibility(View.GONE);
+  		          todoName.setText(item.getKouza());
+ 		           todoName.setTypeface(null, Typeface.BOLD);
+		            todoName.setTextSize(20);
+ 		           todoName.setPadding(16, 16, 16, 16);
+		        } else {
+ 		           // 通常行：CheckBox 表示
+		            ck.setVisibility(View.VISIBLE);
+ 		           todoName.setText(item.getKouza());
+		            todoName.setTypeface(null, Typeface.NORMAL);
+		            todoName.setTextSize(24);
+		            todoName.setPadding(0, 0, 0, 0);
 
-		    if ("title".equals(item.get(Key))) {
-		        // セクションタイトル行：CheckBox 非表示、TextView 強調
-		        ck.setVisibility(View.GONE);
-		        todoName.setText(item.getKouza());
-		        todoName.setTypeface(null, Typeface.BOLD);
-		        todoName.setTextSize(24);  // タイトルは大きく
-		        todoName.setPadding(16, 16, 16, 16);
-		    } else {
-		        // 通常行：CheckBox 表示、ダウンロード状態を反映
- 		       ck.setVisibility(View.VISIBLE);
-		        todoName.setText(item.getKouza());
- 		       todoName.setTypeface(null, Typeface.NORMAL);
- 		       todoName.setTextSize(20);
- 		       todoName.setPadding(0, 0, 0, 0);
-
-		        final int p = position;
-		        ck.setOnCheckedChangeListener(null); // リスナー一時解除
-		        ck.setChecked(item.getIsDownload() == 1);
-		        ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-		            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		                classes.get(p).setIsDownload(isChecked ? 1 : 0);
-		            }
-		        });
+ 		           final int p = position;
+		            ck.setOnCheckedChangeListener(null); // リスナーの一時解除
+		            ck.setChecked(item.getIsDownload() == 1);
+		            ck.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+   		             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+  		                  if (isChecked) {
+  		                      classes.get(p).setIsDownload(1);
+  		                  } else {
+   		                     classes.get(p).setIsDownload(0);
+   		                 }
+ 		               }
+ 		           });
+		        }
 		    }
-
 		    return view;
 		}
 */
+	    
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = convertView;
@@ -471,7 +475,6 @@ public class MainActivity extends Activity {
 				if (todoName != null) {
 					todoName.setText(item.getKouza());
 				}
-
 				CheckBox ck = (CheckBox) view.findViewById(R.id.todo_check);
 				final int p = position;
 				ck.setOnCheckedChangeListener(new OnCheckedChangeListener() {
