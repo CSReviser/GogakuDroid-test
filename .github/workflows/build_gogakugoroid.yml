@@ -38,7 +38,8 @@ jobs:
         bash -x ./android.sh > ../build.log 2>&1 || (cat ../build.log && exit 1)
         mkdir -p ../app/libs
         ls -r prebuilt/bundle-android-aar/
-        cp -v prebuilt/bundle-android-aar/*.aar ../app/libs/
+        find ffmpeg-kit/prebuilt/bundle-android-aar -name '*.aar'
+        cp ffmpeg-kit/prebuilt/bundle-android-aar/ffmpeg-kit/ffmpeg-kit.aar app/libs/
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
