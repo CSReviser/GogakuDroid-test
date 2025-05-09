@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.github.naofum.gogakudroid"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 35
         multiDexEnabled true
     }
