@@ -129,6 +129,17 @@ public class MainActivity extends Activity {
 	SharedPreferences sharedPref;
 	protected static File FILES_DIR;
 
+public class Classes {
+    private String key;
+    private String kouza;
+    private int isDownload;
+
+    public String getKey() { return key; }
+    public String getKouza() { return kouza; }
+    public int getIsDownload() { return isDownload; }
+    public void setIsDownload(int v) { isDownload = v; }
+}
+
 	@Override
 	protected void onStop() {
 		super.onStop();
