@@ -38,7 +38,7 @@ jobs:
     - name: Build ffmpeg-kit
       working-directory: ffmpeg-kit
       run: |
-        bash -x ./android.sh --enable-gpl --preset full > ../build.log 2>&1 || (cat ../build.log && exit 1)
+        bash -x ./android.sh --enable-gpl --full > ../build.log 2>&1 || (cat ../build.log && exit 1)
         mkdir -p ../app/libs
 
     - name: Show AAR files
