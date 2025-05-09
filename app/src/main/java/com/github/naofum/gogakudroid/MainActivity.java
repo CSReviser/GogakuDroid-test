@@ -129,17 +129,6 @@ public class MainActivity extends Activity {
 	SharedPreferences sharedPref;
 	protected static File FILES_DIR;
 
-public class Classes {
-    private String key;
-    private String kouza;
-    private int isDownload;
-
-    public String getKey() { return key; }
-    public String getKouza() { return kouza; }
-    public int getIsDownload() { return isDownload; }
-    public void setIsDownload(int v) { isDownload = v; }
-}
-
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -439,7 +428,7 @@ public class Classes {
 		    TextView todoName = view.findViewById(R.id.todo_name);
 		    CheckBox ck = view.findViewById(R.id.todo_check);
 
-		    if ("title".equals(item.getKey())) {
+		    if ("title".equals(item.get(Key))) {
 		        // セクションタイトル行：CheckBox 非表示、TextView 強調
 		        ck.setVisibility(View.GONE);
 		        todoName.setText(item.getKouza());
