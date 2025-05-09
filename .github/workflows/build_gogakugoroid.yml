@@ -30,7 +30,7 @@ jobs:
       run: |
          git clone https://github.com/arthenica/ffmpeg-kit.git
          cd ffmpeg-kit
-         git checkout v5.1.LTS
+         git checkout b49218d
 
     - name: Grant execute permission to android.sh
       run: chmod +x ffmpeg-kit/android.sh
