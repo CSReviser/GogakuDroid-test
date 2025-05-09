@@ -44,7 +44,7 @@ jobs:
         ls ffmpeg-kit/prebuilt/bundle-android-aar/
 
     - name: ffmpeg-kit.aar を app/libs にコピー
-      run: cp ffmpeg-kit/prebuilt/bundle-android-aar/ffmpeg-kit.aar app/libs/
+      run: cp ffmpeg-kit/prebuilt/bundle-android-aar/ffmpeg-kit/ffmpeg-kit.aar app/libs/
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
