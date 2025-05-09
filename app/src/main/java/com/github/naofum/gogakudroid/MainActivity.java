@@ -492,7 +492,7 @@ public class MainActivity extends Activity {
 //			}
 //			return view;
 //		}
-//	}
+	}
 
 	class Classes implements Serializable {
 
