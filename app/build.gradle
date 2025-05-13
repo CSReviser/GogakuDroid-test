@@ -17,7 +17,7 @@ android {
         }
     }
 
-    maven { url 'https://jitpack.io' }
+    
     namespace 'com.github.naofum.gogakudroid'
 }
 
