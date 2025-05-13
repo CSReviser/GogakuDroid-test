@@ -17,13 +17,7 @@ android {
         }
     }
 
-    // ★ AAR読み込み用に追加
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
-
+    maven { url 'https://jitpack.io' }
     namespace 'com.github.naofum.gogakudroid'
 }
 
