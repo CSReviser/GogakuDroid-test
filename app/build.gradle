@@ -26,5 +26,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:23.3.0'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     // build.gradle の dependencies に以下を追加
-    implementation 'com.github.Sahad2701:ffmpeg-kit:ffmpeg-kit-release-v6.0.3'
+    implementation 'com.github.Sahad2701:ffmpeg-kit:flutter_fix_retired_v5.1.0'
 }
