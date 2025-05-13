@@ -23,31 +23,6 @@ jobs:
       run: |
           yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;25.2.9519653"
 
-    - name: Set ANDROID_NDK_ROOT
-      run: echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/25.2.9519653" >> $GITHUB_ENV
-
-    - name: Clone ffmpeg-kit (from fork)
-      run: |
-         git clone https://github.com/arthenica/ffmpeg-kit.git
-         cd ffmpeg-kit
-
-    - name: Grant execute permission to android.sh
-      run: chmod +x ffmpeg-kit/android.sh
-
-    - name: Build ffmpeg-kit
-      working-directory: ffmpeg-kit
-      run: |
-        bash -x ./android.sh --full > ../build.log 2>&1 || (cat ../build.log && exit 1)
-        mkdir -p ../app/libs
-
-    - name: Show AAR files
-      run: |
-        find ffmpeg-kit/prebuilt/bundle-android-aar -name '*.aar'
-        ls ffmpeg-kit/prebuilt/bundle-android-aar/
-
-    - name: ffmpeg-kit.aar を app/libs にコピー
-      run: cp ffmpeg-kit/prebuilt/bundle-android-aar/ffmpeg-kit/ffmpeg-kit.aar app/libs/
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
